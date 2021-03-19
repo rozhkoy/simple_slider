@@ -1,42 +1,44 @@
-
+	// button get all 
 	var p = document.querySelectorAll('.button-slider');
-	p[0].addEventListener("click", toLeft,  true);
-	p[1].addEventListener("click", toRight,  true);
-	var width = document.querySelectorAll('div.slider');
+	p[0].addEventListener("click", toRight,  true);
+	p[1].addEventListener("click", toLeft,  true);
+	//mainblick
+	var mainBlockSlider = document.querySelectorAll('div.slider');
+	//subblocks in mainblock
 	var widthblocks = document.querySelectorAll('div.slide');
-	// widthblocks[0].style.width = " 100%";
-	var widthBlock = width[0].offsetWidth;
-	quantityBlocks = (widthblocks.length) - 1;
-	var startSlider = (widthBlock * quantityBlocks) * -1 ;
-	var endSlider = (widthBlock * quantityBlocks) * -1 ;
-	var BttnLeft = 0;
-	
+	//width subblock
+	var widthBlock = mainBlockSlider[0].offsetWidth;
+	//quantity subblock
+	var quantityBlocks = (widthblocks.length) - 1;
+	var endSlider = (quantityBlocks * widthBlock) * -1;
+	var bttn = 0;
 	var position = 0;
 	var secondposition;
-	secondposition = 1;
 	secondposition = position + 1;
-	earlyposition =  position - 1;
-	width[position].style.webkitTransform = "translateX(" + startSlider + "px)";
-	// width[position].style.webkitTransform = "translateX(" + widthBlock + "px)";
-	function toLeft() {
-			width[position].style.transition = "all .3s";
-		 	BttnLeft++;
- 			var treking = (BttnLeft *  widthBlock) + startSlider;
- 			width[position].style.webkitTransform = "translateX(" + treking + "px)";
- 			if(BttnLeft >= widthblocks.length){
- 				width[position].style.webkitTransform = "translateX(" + startSlider + "px)";
- 				BttnLeft = 0;
+
+
+	function toRight() {
+		 	if(bttn == 0){
+ 				mainBlockSlider[position].style.webkitTransform = "translateX(" + endSlider + "px)";
+ 				bttn = quantityBlocks;
  			}
+ 			else{
+ 				// alert(bttn)
+	 			var treking = ((bttn) - 1) * (widthBlock) * -1;
+	 			mainBlockSlider[position].style.webkitTransform = "translateX(" + treking + "px)";
+	 			bttn--;
+	 		}
+ 			
 
 	}
-	function toRight() {
-		 	BttnLeft--;
- 			var treking = (BttnLeft *  widthBlock) + startSlider;
- 			width[position].style.webkitTransform = "translateX(" + treking + "px)";
- 			if(BttnLeft <= -1){
- 				width[position].style.webkitTransform = "translateX(" +  0  + "px)";
- 				BttnLeft = widthblocks.length ;
- 			}
+	function toLeft() { 
+			var treking = ((bttn + 1) *  widthBlock) * -1;
+			mainBlockSlider[position].style.webkitTransform = "translateX(" + treking + "px)";
+			if(bttn == quantityBlocks){
+				mainBlockSlider[position].style.webkitTransform = "translateX(" +  0  + "px)";
+				bttn = -1 ;
+			}
+		    bttn++;
 
 	}
  
